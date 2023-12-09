@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+ web:
+  container_name: Server
+  build: ./server
+  ports: 
+   - "8000:80"
+  volumes:
+   - servervol:/serverdata
+   - clientvol:/clientdata
+volumes:
+ servervol:
+ clientvol:
