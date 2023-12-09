@@ -1,10 +1,25 @@
 # Use the official Python Alpine image as the base image
-FROM nginx:latest
+FROM python:3.9.18-alpine3.18
+
+# Set environment variables for configuration and defaults
+ENV FLASK_APP=app.py  
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=5000
+
+# Set the working directory inside the container
+WORKDIR /serverdata
 
 # Copy all code to the working directory
-COPY ./index.html /usr/share/nginx/html/
+COPY app.py /serverdata
 
-
-# Expose the port that Flask will be running on
-#EXPOSE 8000
+# Copy all code to the working directory
+COPY requirements.txt /serverdata
  
+# Install the required packages
+RUN pip install -r requirements.txt
+ 
+# Expose the port that Flask will be running on
+EXPOSE 5000
+ 
+# Set the command to run when the container starts
+CMD ["flask", "run"]

@@ -5,10 +5,11 @@ services:
   container_name: Server
   build: ./server
   ports: 
-   - "8000:80"
+   - "5000:5000"
   volumes:
    - servervol:/serverdata
    - clientvol:/clientdata
+    
 volumes:
  servervol:
  clientvol:
